@@ -8,15 +8,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Get Version via powershell
+        id: get_version
+        run: |
+         $version = [System.Version]::Parse((Get-Content NetPalette/NetPalette.csproj | Select-String -Pattern "<Version>(.*)</Version>").Matches.Groups[1].Value)
+         $env:CURRENT_VERSION = $version.ToString()
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-      - name: Get Version via powershell
-        id: get_version
-        run: |
-          $version = [System.Version]::Parse((Get-Content NetPalette/NetPalette.csproj | Select-String -Pattern "<Version>(.*)</Version>").Matches.Groups[1].Value)
-          $env:CURRENT_VERSION = $version.ToString()
       - name: Build
         run: |
           dotnet workload install maui --ignore-failed-sources

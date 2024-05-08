@@ -9,9 +9,9 @@
 	<!-- NuGet -->
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>0.0.1</AssemblyVersion>
-		<AssemblyFileVersion>0.0.1</AssemblyFileVersion>
-		<Version>0.0.1</Version>
+		<AssemblyVersion>0.0.2</AssemblyVersion>
+		<AssemblyFileVersion>0.0.2</AssemblyFileVersion>
+		<Version>0.0.2</Version>
 		<Title>NetPalette</Title>
 		<PackageId>NetPalette</PackageId>
 		<PackageReleaseNotes>https://github.com/nor0x/NetPalette/releases</PackageReleaseNotes>

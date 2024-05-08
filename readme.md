@@ -98,6 +98,8 @@ A `PaletteGenerator` instance containing the generated palette.
 
 - `ArgumentException`: Thrown when the image byte data doesn't match the image size or has invalid encoding.
 
+### not finalized yet
+please note that the API is not finalized yet and might change in the future. If you have any suggestions or feature requests, feel free to open an issue or a pull request.
 
 
 ## Credits

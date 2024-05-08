@@ -12,9 +12,11 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-      - name: Get Version
+      - name: Get Version via powershell
         id: get_version
-        run: echo "CURRENT_VERSION=$(cat NetPalette/NetPalette.csproj | grep -oP '(?<=<Version>)(.*?)(?=<\/Version>)')" >> $GITHUB_ENV
+        run: |
+          $version = [System.Version]::Parse((Get-Content NetPalette/NetPalette.csproj | Select-String -Pattern "<Version>(.*)</Version>").Matches.Groups[1].Value)
+          $env:CURRENT_VERSION = $version.ToString()
       - name: Build
         run: |
           dotnet workload install maui --ignore-failed-sources

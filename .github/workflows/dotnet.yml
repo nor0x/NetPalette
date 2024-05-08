@@ -12,6 +12,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
+      - name: Get Version
+        id: get_version
+        run: echo "::set-output name=version::$(grep -oP '(?<=<Version>)(.*)(?=</Version>)' NetPalette/NetPalette.csproj)"
       - name: Build
         run: |
           dotnet workload install maui --ignore-failed-sources
@@ -40,3 +43,7 @@ jobs:
           gh-user: nor0x
           # access token
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Tag
+        run: git tag -a v${{ steps.get_version.outputs.version }} -m "v${{ steps.get_version.outputs.version }}"
+      - name: Push Tag
+        run: git push origin v${{ steps.get_version.outputs.version }}

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34825.169
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPalette", "NetPalette.csproj", "{0C140D81-CD55-409F-823B-E7E7FA50A7B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPalette", "NetPalette\NetPalette.csproj", "{0C140D81-CD55-409F-823B-E7E7FA50A7B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPalette.Sample.Maui", "..\Samples\NetPalette.Sample.Maui\NetPalette.Sample.Maui.csproj", "{D2FD4A7A-EED6-46FB-A939-5314F2A4AC58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPalette.Sample.Maui", "Samples\NetPalette.Sample.Maui\NetPalette.Sample.Maui.csproj", "{D2FD4A7A-EED6-46FB-A939-5314F2A4AC58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

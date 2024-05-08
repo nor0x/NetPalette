@@ -1,30 +1,75 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 Shell.NavBarIsVisible="False"
-             x:Class="NetPalette.Sample.Maui.MainPage">
+			 x:Class="NetPalette.Sample.Maui.MainPage">
 
 	<Grid RowDefinitions="600,*">
-		<Image x:Name="InputImage" Aspect="AspectFit" Margin="40"  />
+		<Image x:Name="InputImage"
+			   Aspect="AspectFit"
+			   Margin="40" />
+		<Image Source="clickme.png" Margin="-550,0,0,0" WidthRequest="200" HeightRequest="300" VerticalOptions="Start" HorizontalOptions="Center" />
+		<Grid Grid.Row="1"
+			  RowDefinitions="*,*,*,*"
+			  ColumnDefinitions="*,*">
+			<BoxView x:Name="DominantColor"
+					 Grid.Row="0"
+					 Grid.ColumnSpan="3" />
+			<BoxView x:Name="MutedColor"
+					 Grid.Row="1"
+					 Grid.Column="0" />
+			<BoxView x:Name="VibrantColor"
+					 Grid.Row="1"
+					 Grid.Column="1" />
+			<BoxView x:Name="LightMutedColor"
+					 Grid.Row="2"
+					 Grid.Column="0" />
+			<BoxView x:Name="LightVibrantColor"
+					 Grid.Row="2"
+					 Grid.Column="1" />
+			<BoxView x:Name="DarkMutedColor"
+					 Grid.Row="3"
+					 Grid.Column="0" />
+			<BoxView x:Name="DarkVibrantColor"
+					 Grid.Row="3"
+					 Grid.Column="1" />
 
-
-		<Grid Grid.Row="1" RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
-			<BoxView x:Name="DominantColor" Grid.Row="0" Grid.ColumnSpan="3" />
-			<BoxView x:Name="MutedColor" Grid.Row="1" Grid.Column="0" />
-			<BoxView x:Name="VibrantColor" Grid.Row="1" Grid.Column="1" />
-			<BoxView x:Name="LightMutedColor" Grid.Row="2" Grid.Column="0" />
-			<BoxView x:Name="LightVibrantColor" Grid.Row="2" Grid.Column="1" />
-			<BoxView x:Name="DarkMutedColor" Grid.Row="3" Grid.Column="0" />
-			<BoxView x:Name="DarkVibrantColor" Grid.Row="3" Grid.Column="1" />
-
-			
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Dominant" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Muted" Grid.Row="1" Grid.Column="0" />
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Vibrant" Grid.Row="1" Grid.Column="1" />
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Light Muted" Grid.Row="2" Grid.Column="0" />
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Light Vibrant" Grid.Row="2" Grid.Column="1" />
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Dark Muted" Grid.Row="3" Grid.Column="0" />
-			<Label TextColor="White" HorizontalTextAlignment="Center" Text="Dark Vibrant" Grid.Row="3" Grid.Column="1" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Dominant"
+				   Grid.Row="0"
+				   Grid.Column="0"
+				   Grid.ColumnSpan="3" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Muted"
+				   Grid.Row="1"
+				   Grid.Column="0" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Vibrant"
+				   Grid.Row="1"
+				   Grid.Column="1" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Light Muted"
+				   Grid.Row="2"
+				   Grid.Column="0" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Light Vibrant"
+				   Grid.Row="2"
+				   Grid.Column="1" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Dark Muted"
+				   Grid.Row="3"
+				   Grid.Column="0" />
+			<Label TextColor="White"
+				   HorizontalTextAlignment="Center"
+				   Text="Dark Vibrant"
+				   Grid.Row="3"
+				   Grid.Column="1" />
 
 		</Grid>
 	</Grid>

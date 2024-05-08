@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-	<TargetFramework>net8.0</TargetFramework>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
-
 
 	<!-- NuGet -->
 	<PropertyGroup>
@@ -20,18 +19,23 @@
 		<PackageIconUrl>https://raw.githubusercontent.com/nor0x/NetPalette/main/Art/packageicon.png</PackageIconUrl>
 		<PackageIcon>packageicon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/nor0x/NetPalette</RepositoryUrl>
-		<PackageTags>color palette generator, color palette, color, palette, color extraction, skiasharp</PackageTags>
+		<PackageTags>color palette generator, color palette, color, palette, color extraction,
+			skiasharp</PackageTags>
 		<Summary>a library to extract color palettes from images</Summary>
-		<Description>a library to extract color palettes from images. based on skiasharp so it works on all modern platforms</Description>
+		<Description>a library to extract color palettes from images. based on skiasharp so it works
+			on all modern platforms</Description>
 		<Owners>Joachim Leonfellner</Owners>
 		<Authors>Joachim Leonfellner</Authors>
 		<Copyright>Copyright 2024 nor0x</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
-
-<ItemGroup>
-	<PackageReference Include="SkiaSharp" Version="2.88.8" />
-</ItemGroup>
+	<ItemGroup>
+		<None Include="..\Art\packageicon.png" Pack="true" PackagePath="\" />
+		<None Include="..\readme.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+	</ItemGroup>
 
 </Project>

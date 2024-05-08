@@ -148,6 +148,10 @@ public class ColorCutQuantizer
     {
         while (queue.Count < maxSize)
         {
+			if(queue.Count == 0)
+			{
+				break;
+			}
             var colorVolumeBox = queue.Dequeue();
             if (colorVolumeBox.CanSplit())
             {

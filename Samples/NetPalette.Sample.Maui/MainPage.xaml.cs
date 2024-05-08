@@ -17,9 +17,12 @@ namespace NetPalette.Sample.Maui
 		{
 			base.OnNavigatedTo(args);
 			InputImage.GestureRecognizers.Add(new TapGestureRecognizer
-            {
-                Command = new Command(async () => await GetNewImage())
-            });
+			{
+				Command = new Command(async () =>
+				{
+					await GetNewImage();
+				})
+			});
 			await GetNewImage();
 		}
 
@@ -39,8 +42,9 @@ namespace NetPalette.Sample.Maui
 			var stopwatch = new Stopwatch();
 			stopwatch.Start();
 			Debug.WriteLine("Starting Palette Generation");
-			var paletteGen = PaletteGenerator.FromBitmap(skBitmap, fillMissingTargets: true);
+			var paletteGen = PaletteGenerator.FromBitmap(skBitmap, fillMissingBaseTargets: true);
 			stopwatch.Stop();
+			await Task.Delay(100);
 			Debug.WriteLine($"Palette Generation took {stopwatch.ElapsedMilliseconds }ms");
 
 			try { 
@@ -118,7 +122,6 @@ namespace NetPalette.Sample.Maui
 				Debug.WriteLine("Exception occurred for DarkVibrantColor: " + ex.Message);
 				DarkVibrantColor.BackgroundColor = Colors.Magenta;
 			}
-
 		}
 	}
 

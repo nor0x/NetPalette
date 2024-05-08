@@ -5,7 +5,7 @@ namespace NetPalette;
 
 public class PaletteGenerator
 {
-	public PaletteGenerator(List<PaletteColor> colors, List<PaletteTarget> targets, bool fillMissingTargets)
+	public PaletteGenerator(List<PaletteColor> colors, List<PaletteTarget> targets, bool fillMissingBaseTargets)
 	{
 		this._colors = colors;
 		this._targets = targets;
@@ -15,13 +15,26 @@ public class PaletteGenerator
 		var stopwatch = new Stopwatch();
 		SortSwatches();
 		SelectSwatches();
-		if (fillMissingTargets)
+		if (fillMissingBaseTargets)
 		{
-			FillMissingSwatches();
+			FillMissingBaseSwatches();
 		}
 	}
 
-	public static PaletteGenerator FromBitmap(SKBitmap encodedImage, int maximumColorCount = 16, SKRect region = default, List<IPaletteFilter> filters = null, List<PaletteTarget> targets = null, bool fillMissingTargets = false)
+	/// <summary>
+	/// Generates a color palette from a bitmap image.
+	/// </summary>
+	/// <param name="encodedImage">The bitmap image from which to generate the palette.</param>
+	/// <param name="maximumColorCount">The maximum number of colors to include in the palette. Default is 16.</param>
+	/// <param name="region">The region of interest within the image. Default is the entire image.</param>
+	/// <param name="filters">Optional palette filters to apply during palette generation.</param>
+	/// <param name="targets">Optional palette targets to specify which colors to select from the generated palette.</param>
+	/// <param name="fillMissingBaseTargets">Specifies whether to fill missing base targets in the selected swatches. Default is false.</param>
+	/// <returns>A PaletteGenerator instance containing the generated palette.</returns>
+	/// <exception cref="ArgumentOutOfRangeException">Thrown when the specified region is outside the bounds of the image.</exception>
+	/// <exception cref="ArgumentException">Thrown when the image byte data doesn't match the image size or has invalid encoding.</exception>
+
+	public static PaletteGenerator FromBitmap(SKBitmap encodedImage, int maximumColorCount = 16, SKRect region = default, List<IPaletteFilter> filters = null, List<PaletteTarget> targets = null, bool fillMissingBaseTargets = false)
 	{
 		if (region.Left < 0.0 || region.Top < 0.0 || region.Right > encodedImage.Width || region.Bottom > encodedImage.Height)
 		{
@@ -48,7 +61,7 @@ public class PaletteGenerator
 
 		var quantizer = new ColorCutQuantizer(encodedImage, maximumColorCount, filters, region);
 		var colors = quantizer.QuantizedColors;
-		return new PaletteGenerator(colors, targets, fillMissingTargets);
+		return new PaletteGenerator(colors, targets, fillMissingBaseTargets);
 	}
 
 	int _defaultCalculateNumberColors = 16;
@@ -64,8 +77,12 @@ public class PaletteGenerator
 	public PaletteColor MutedColor => _selectedSwatches[PaletteTarget.Muted];
 	public PaletteColor LightMutedColor => _selectedSwatches[PaletteTarget.LightMuted];
 	public PaletteColor DarkMutedColor => _selectedSwatches[PaletteTarget.DarkMuted];
-	public PaletteColor DominantColor => _dominantColor;
+	public PaletteColor DominantColor => _dominantColor ?? _colors[0];
 
+
+	/// <summary>
+	/// All Quantized colors
+	/// </summary>
 	public IEnumerable<SKColor> Colors
 	{
 		get
@@ -76,6 +93,20 @@ public class PaletteGenerator
 			}
 		}
 	}	
+
+	/// <summary>
+	/// Colors from the selected swatches
+	/// </summary>
+	public IEnumerable<SKColor> PaletteColors
+	{
+		get
+		{
+			foreach (var paletteColor in _selectedSwatches.Values)
+			{
+				yield return paletteColor.Color;
+			}
+		}
+	}
 
 	public Dictionary<PaletteTarget, PaletteColor> SelectedSwatches => _selectedSwatches;
 
@@ -105,7 +136,7 @@ public class PaletteGenerator
         }
     }
 
-	void FillMissingSwatches()
+	void FillMissingBaseSwatches()
 	{
 		if (!_selectedSwatches.ContainsKey(PaletteTarget.Vibrant))
 		{

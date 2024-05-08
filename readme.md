@@ -10,7 +10,7 @@ A Library for generating color palettes from images - powered by SkiaSharp so it
 ## Demo
 There is a .NET MAUI app in [/Samples](https://github.com/nor0x/NetPalette/tree/main/Samples/NetPalette.Sample.Maui) which demonstrates palette generation for random Unsplash images. The library is not limited to MAUI, it can be used in any .NET UI framework like Uno, Avalonia, WinUI, WPF, etc. any framework that supports SkiaSharp.
 
-![Demo](https://raw.githubusercontent.com/nor0x/NetPalette/main/Art/IMG_12380912.gif)
+https://github.com/nor0x/NetPalette/assets/3210391/dea64c88-354f-458f-bf04-9e915d801a43
 
 ## Usage
 ### Palette Generation

@@ -112,7 +112,7 @@ public class PaletteTarget
         }
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return obj is PaletteTarget target &&
                MinimumSaturation == target.MinimumSaturation &&

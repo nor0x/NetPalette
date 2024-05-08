@@ -108,13 +108,16 @@ public class ColorCutQuantizer
 			{
 				currentColor = colorKey;
 				currentColorCount = hist[colorKey];
-				if(currentColorCount == null)
+				if(currentColorCount is null)
                 {
                     hist[colorKey] = currentColorCount = new ColorCount();
                 }
 			}
 
-            currentColorCount.Count += 1;
+			if (currentColorCount is not null)
+			{
+				currentColorCount.Count += 1;
+			}
 		}
 		hist.RemoveWhere(x => ShouldIgnoreColor(x));
 		if (hist.Hist.Count() <= _maxColors)
@@ -122,7 +125,7 @@ public class ColorCutQuantizer
 			paletteColors.Clear();
 			foreach (var color in hist.Keys)
 			{
-				paletteColors.Add(new PaletteColor(color, hist[color].Count));
+				paletteColors.Add(new PaletteColor(color, hist[color]?.Count ?? 0));
 			}
 		}
 		else

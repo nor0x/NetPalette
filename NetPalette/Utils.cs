@@ -67,7 +67,6 @@ namespace NetPalette;
 
 public record PaletteColor(SKColor Color, int Population);
 
-
 enum ColorComponent
 {
     Red,

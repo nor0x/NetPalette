@@ -34,7 +34,7 @@ public class PaletteGenerator
 	/// <exception cref="ArgumentOutOfRangeException">Thrown when the specified region is outside the bounds of the image.</exception>
 	/// <exception cref="ArgumentException">Thrown when the image byte data doesn't match the image size or has invalid encoding.</exception>
 
-	public static PaletteGenerator FromBitmap(SKBitmap encodedImage, int maximumColorCount = 16, SKRect region = default, List<IPaletteFilter> filters = null, List<PaletteTarget> targets = null, bool fillMissingBaseTargets = false)
+	public static PaletteGenerator FromBitmap(SKBitmap encodedImage, int maximumColorCount = 16, SKRect region = default, List<IPaletteFilter>? filters = null, List<PaletteTarget>? targets = null, bool fillMissingBaseTargets = false)
 	{
 		if (region.Left < 0.0 || region.Top < 0.0 || region.Right > encodedImage.Width || region.Bottom > encodedImage.Height)
 		{
@@ -69,7 +69,7 @@ public class PaletteGenerator
 	List<PaletteColor> _colors;
 	List<PaletteTarget> _targets;
 	Dictionary<PaletteTarget, PaletteColor> _selectedSwatches;
-	PaletteColor _dominantColor;
+	PaletteColor? _dominantColor;
 
 	public PaletteColor VibrantColor => _selectedSwatches[PaletteTarget.Vibrant];
 	public PaletteColor LightVibrantColor => _selectedSwatches[PaletteTarget.LightVibrant];
@@ -281,7 +281,7 @@ public class PaletteGenerator
 	PaletteColor? GenerateScoredTarget(PaletteTarget target, HashSet<SKColor> usedColors)
     {
         var maxScoreSwatch = GetMaxScoredSwatchForTarget(target, usedColors);
-        if (maxScoreSwatch != null && target.IsExclusive)
+        if (maxScoreSwatch is not null && target.IsExclusive)
         {
             usedColors.Add(maxScoreSwatch.Color);
         }
@@ -291,14 +291,14 @@ public class PaletteGenerator
 	PaletteColor? GetMaxScoredSwatchForTarget(PaletteTarget target, HashSet<SKColor> usedColors)
     {
         float maxScore = 0.0f;
-        PaletteColor maxScoreSwatch = null;
+        PaletteColor? maxScoreSwatch = null;
         foreach (var paletteColor in _colors)
         {
 			var shouldScore = ShouldBeScoredForTarget(paletteColor, target, usedColors);
             if (shouldScore)
             {
                 var score = GenerateScore(paletteColor, target);
-				if (maxScoreSwatch == null || score > maxScore)
+				if (maxScoreSwatch is null || score > maxScore)
 				{
 					maxScoreSwatch = paletteColor;
 					maxScore = score;
@@ -344,7 +344,7 @@ public class PaletteGenerator
             valueScore = target.LightnessWeight *
                 (1.0f - Math.Abs(lightness - target.TargetLightness));
         }
-        if (_dominantColor != null && target.PopulationWeight > 0.0f)
+        if (_dominantColor is not null && target.PopulationWeight > 0.0f)
         {
             populationScore = target.PopulationWeight *
                 (paletteColor.Population / _dominantColor.Population);
